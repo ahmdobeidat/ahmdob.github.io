@@ -1,30 +1,49 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<main class="page-content" aria-label="Content" dir="rtl" lang="ar">
+  <div class="archive-wrapper" style="max-width: 800px; margin: auto; padding: 20px;">
 
-<ul class="taxonomy__index">
-  {% assign postsInYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
-  {% for year in postsInYear %}
-    <li>
-      <a href="#{{ year.name }}">
-        <strong>{{ year.name }}</strong> <span class="taxonomy__count">{{ year.items | size }}</span>
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+    {{ content }}
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-{% assign postsByYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
-{% for year in postsByYear %}
-  <section id="{{ year.name }}" class="taxonomy__section">
-    <h2 class="archive__subtitle">{{ year.name }}</h2>
-    <div class="entries-{{ entries_layout }}">
-      {% for post in year.items %}
-        {% include archive-single.html type=entries_layout %}
+    <ul class="taxonomy__index" style="list-style: none; padding: 0;">
+      {% assign postsInYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+      {% for year in postsInYear %}
+        <li style="margin-bottom: 10px;">
+          <a href="#{{ year.name }}" style="text-decoration: none; font-weight: bold;">
+            {{ year.name }} <span style="color: gray;">({{ year.items | size }})</span>
+          </a>
+        </li>
       {% endfor %}
-    </div>
-    <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
-  </section>
-{% endfor %}
+    </ul>
+
+    <hr>
+
+    {% assign entries_layout = page.entries_layout | default: 'list' %}
+    {% assign postsByYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+    {% for year in postsByYear %}
+      <section id="{{ year.name }}" class="taxonomy__section" style="margin-top: 40px;">
+        <h2 class="archive__subtitle" style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">{{ year.name }}</h2>
+
+        <div class="entries-{{ entries_layout }}">
+          {% for post in year.items %}
+            <div class="archive-post" style="margin-bottom: 15px;">
+              <a href="{{ post.url | relative_url }}" style="font-size: 1.1rem; color: #b30000; font-weight: bold; text-decoration: none;">
+                {{ post.title }}
+              </a>
+              <div style="color: gray; font-size: 0.9rem;">
+                {{ post.date | date: "%Y-%m-%d" }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <a href="#page-title" class="back-to-top" style="display: block; margin-top: 20px; text-align: left; font-size: 0.8rem;">
+          ↑ العودة للأعلى
+        </a>
+      </section>
+    {% endfor %}
+
+  </div>
+</main>
