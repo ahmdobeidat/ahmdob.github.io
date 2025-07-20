@@ -1,26 +1,49 @@
 ---
 layout: default
+title: "كل المقالات"
+permalink: /posts/
 ---
 
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
-  {% include page__hero.html %}
-{% elsif page.header.video.id and page.header.video.provider %}
-  {% include page__hero_video.html %}
-{% endif %}
+<main class="page-content" aria-label="Content" dir="rtl" lang="ar">
+  <div class="posts-wrapper" style="max-width: 800px; margin: auto; padding: 20px;">
 
-{% if page.url != "/" and site.breadcrumbs %}
-  {% unless paginator %}
-    {% include breadcrumbs.html %}
-  {% endunless %}
-{% endif %}
+    <h1 style="text-align: center; color: #b30000;">كل المقالات</h1>
 
-<div id="main" role="main">
-  {% include sidebar.html %}
+    <ul class="taxonomy__index" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
+      {% assign postsInYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+      {% for year in postsInYear %}
+        <li>
+          <a href="#{{ year.name }}" style="font-weight: bold; text-decoration: none; color: #222;">
+            {{ year.name }} <span style="color: gray;">({{ year.items | size }})</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
 
-  <div class="archive">
-    {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 id="page-title" class="page__title"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>{{ page.title }}</h1>
-    {% endunless %}
-    {{ content }}
+    <hr style="margin: 20px 0;">
+
+    {% assign entries_layout = page.entries_layout | default: 'list' %}
+    {% assign postsByYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+    {% for year in postsByYear %}
+      <section id="{{ year.name }}" class="taxonomy__section" style="margin-top: 40px;">
+        <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">{{ year.name }}</h2>
+
+        {% for post in year.items %}
+          <div style="margin-bottom: 15px;">
+            <a href="{{ post.url | relative_url }}" style="color: #b30000; font-weight: bold; text-decoration: none;">
+              {{ post.title }}
+            </a>
+            <div style="color: #666; font-size: 0.85rem;">
+              {{ post.date | date: "%d %B %Y" }}
+            </div>
+          </div>
+        {% endfor %}
+
+        <a href="#page-title" class="back-to-top" style="display: block; margin-top: 20px; text-align: left; font-size: 0.8rem;">
+          ↑ العودة للأعلى
+        </a>
+      </section>
+    {% endfor %}
+
   </div>
-</div>
+</main>
