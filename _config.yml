@@ -17,7 +17,7 @@
 minimal_mistakes_skin    : "mint" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "ar-JO"
+locale                   : "ar"
 rtl                      : true # turns direction of the page into right to left for RTL languages
 title                    : "مدونة سيبرانية"
 title_separator          : "-"
@@ -118,7 +118,7 @@ author:
   name             : "Ahmad | أحمد"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "زهقان شوي"
-  location         : "Somewhere"
+  location         : "هون"
   email            :
   links:
     - label: "Email"
@@ -318,7 +318,7 @@ compress_html:
 defaults:
   # _posts
   - scope:
-      path: ""
+      path: "_posts"
       type: posts
     values:
       layout: single
@@ -327,3 +327,5 @@ defaults:
       comments: # true
       share: true
       related: true
+      lang: ar
+      locale: ar
