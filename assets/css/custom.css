@@ -1,0 +1,16 @@
+/* Apply to all pages */
+.page-content, .post-content {
+  /* Limit width and center */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  /* RTL support */
+  direction: rtl;
+  text-align: right;
+}
+
+/* Add some extra inner padding */
+.page-content h1, .page-content h2, .page-content p {
+  padding: 0 10px;
+}
