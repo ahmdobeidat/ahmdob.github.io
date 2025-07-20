@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "جميع المقالات"
+    url: /all-posts/
   - title: "موقعي المتقدم (شوي)"
     url: https://l0mb4rd.gitbook.io/
   # - title: "About"
