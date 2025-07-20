@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "كلمات السر: كيف تحمي نفسك بأسهل الطرق"
 date: 2025-07-19 20:00:00 +0300
 categories: cybersec
