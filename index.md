@@ -1,3 +1,9 @@
+---
+layout: single
+author_profile: true
+lang: ar
+---
+
 السلام عليكم!
 
 

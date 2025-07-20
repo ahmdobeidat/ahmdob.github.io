@@ -2,6 +2,8 @@
 main:
   - title: "موقعي المتقدم (شوي)"
     url: https://l0mb4rd.gitbook.io/
+  - title: "جميع المقالات"
+    url: /all-posts/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
