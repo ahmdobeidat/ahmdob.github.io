@@ -1,43 +1,43 @@
 ---
 layout: default
+title: "كل المقالات"
+permalink: /posts/
 ---
 
 <main class="page-content" aria-label="Content" dir="rtl" lang="ar">
-  <div class="archive-wrapper" style="max-width: 800px; margin: auto; padding: 20px;">
+  <div class="posts-wrapper" style="max-width: 800px; margin: auto; padding: 20px;">
 
-    {{ content }}
+    <h1 style="text-align: center; color: #b30000;">كل المقالات</h1>
 
-    <ul class="taxonomy__index" style="list-style: none; padding: 0;">
+    <ul class="taxonomy__index" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
       {% assign postsInYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
       {% for year in postsInYear %}
-        <li style="margin-bottom: 10px;">
-          <a href="#{{ year.name }}" style="text-decoration: none; font-weight: bold;">
+        <li>
+          <a href="#{{ year.name }}" style="font-weight: bold; text-decoration: none; color: #222;">
             {{ year.name }} <span style="color: gray;">({{ year.items | size }})</span>
           </a>
         </li>
       {% endfor %}
     </ul>
 
-    <hr>
+    <hr style="margin: 20px 0;">
 
     {% assign entries_layout = page.entries_layout | default: 'list' %}
     {% assign postsByYear = site.posts | where_exp: "item", "item.hidden != true" | group_by_exp: 'post', 'post.date | date: "%Y"' %}
     {% for year in postsByYear %}
       <section id="{{ year.name }}" class="taxonomy__section" style="margin-top: 40px;">
-        <h2 class="archive__subtitle" style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">{{ year.name }}</h2>
+        <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">{{ year.name }}</h2>
 
-        <div class="entries-{{ entries_layout }}">
-          {% for post in year.items %}
-            <div class="archive-post" style="margin-bottom: 15px;">
-              <a href="{{ post.url | relative_url }}" style="font-size: 1.1rem; color: #b30000; font-weight: bold; text-decoration: none;">
-                {{ post.title }}
-              </a>
-              <div style="color: gray; font-size: 0.9rem;">
-                {{ post.date | date: "%Y-%m-%d" }}
-              </div>
+        {% for post in year.items %}
+          <div style="margin-bottom: 15px;">
+            <a href="{{ post.url | relative_url }}" style="color: #b30000; font-weight: bold; text-decoration: none;">
+              {{ post.title }}
+            </a>
+            <div style="color: #666; font-size: 0.85rem;">
+              {{ post.date | date: "%d %B %Y" }}
             </div>
-          {% endfor %}
-        </div>
+          </div>
+        {% endfor %}
 
         <a href="#page-title" class="back-to-top" style="display: block; margin-top: 20px; text-align: left; font-size: 0.8rem;">
           ↑ العودة للأعلى
